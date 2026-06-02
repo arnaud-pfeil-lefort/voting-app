@@ -25,12 +25,10 @@ source "docker" "voting_app" {
 build {
   sources = ["source.docker.voting_app"]
 
-  # Ansible doit être disponible dans le conteneur pour ansible-local
   provisioner "shell" {
     inline = ["pip install --quiet ansible"]
   }
 
-  # Lance le playbook depuis l'intérieur du conteneur
   provisioner "ansible-local" {
     playbook_file  = "./playbook.yml"
     playbook_dir   = "."
